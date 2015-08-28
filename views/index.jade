@@ -6,13 +6,14 @@ html(lang="en")
     meta(name="viewport", content="width=device-width")
     link(rel='stylesheet', href='//maxcdn.bootstrapcdn.com/bootswatch/3.3.5/readable/bootstrap.min.css')
     link(rel='stylesheet', href='css/main.css')
+    script(src="//cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js")
   body
     article#main.container
         div.jumbotron.col-sm-10.col-sm-offset-1
           span#logo.icon-map
 
           h1 Thenmap
-          p.intro Thenmap is a repository for historical borders. You can use it to create historical maps, like the one below.
+          p.intro Thenmap is a repository for historical borders.<br/>You can use it to create historical maps, like the one below.
 
         div.row
           div.col-sm-5.col-sm-offset-1
@@ -28,7 +29,7 @@ html(lang="en")
             p We built a super simple <a href="//github.com/rotsee/thenmap-js">javascript library for Thenmap</a> that lets you draw SVG maps with a few lines of code. You can color the map by defining fill colors in a Google spreadsheet.
             p Look how simple it is:
             pre
-              code
+              code.prettyprint
                 |var settings = {
                 |  dataKey: "1xyNmpKKksy7ZaELB12UY4M2CP0-4EkwO7DWpfu30wsE",
                 |  dataset: "world",
@@ -58,6 +59,16 @@ html(lang="en")
             Thenmap.init("worldmap", settings);
 
         div.col-sm-10.col-sm-offset-1
-          p Looking for the old version of this page? Find it at <a class="servicelink" href="//old.thenmap.net">old.thenmap.net</a>.
+          h2 Credits, copyright and licensing
+          p Thenmap is built by <a href="//twitter.com/leowallentin">Leo Wallentin</a> from <a href="//jplusplus.se">Journalism++ Stockholm</a> with assictance from Danny XXX and <a href="//twitter.com/jensfinnas">Jens Finnäs</a>.
+
+          h2 Contribute
+          p Fill me in!
+
+
+        div.col-sm-10.col-sm-offset-1
+          small Looking for the old version of this page? Find it at <a class="servicelink" href="//old.thenmap.net">old.thenmap.net</a>.
+
+    <a href="https://github.com/jplusplus/thenmap-api"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/a6677b08c955af8400f44c6298f40e7d19cc5b2d/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677261795f3664366436642e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png"></a>
 
 //-     script(src="//cdn.thenmap.net/thenmap-1.0.0.min.js")

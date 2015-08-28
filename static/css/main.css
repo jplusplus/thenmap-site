@@ -1,4 +1,18 @@
 
+/* TYPOGRAPHY
+*/
+h2 {
+	border-bottom: 4px solid #492A85;
+	padding-bottom: 11px;
+	margin-bottom: 17px;
+}
+
+pre code {
+	font-size: 80%;
+}
+
+/* Jumbotron with logo and intro text
+*/
 .jumbotron {
 	text-align: center;
 }
@@ -8,6 +22,7 @@
 	display: inline-block;
 	margin-bottom: 25px;
 }
+
 
 /* Logo as icomoon font
 */
