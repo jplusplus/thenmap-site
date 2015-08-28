@@ -17,27 +17,43 @@ html(lang="en")
         div.row
           div.col-sm-5.col-sm-offset-1
             h2 Thenmap API         
-
-            p Are you a developer? Check out the <a class="servicelink" href="//api.thenmap.net">Thenmap API</a>, to learn how to fetch the data.
+            p.lead Use the Thenmap API to fetch maps with historically accurate borders as GeoJSON or SVG.
+            p Pass a year and preferred projection and the API will give you a map in return. Like a <a href="//api.thenmap.net/v1/world/geo/1956">world map of 1954</a> or a map of <a href="//api.thenmap.net/v1/sweden/geo/1979">Swedish municipalities from 1979</a>.
+            p The Thenmap API currently holds <strong>world borders post 1945</strong> and <strong>Swedish municipality borders post 1973</strong>. 
+            p Learn more by reading the <a href="//api.thenmap.net">full documentation</a>.
 
           div.col-sm-5
             h2 Thenmap.js
-            p Do you want to put a map on your web site? Try out a super simple <a class="servicelink" href="//github.com/rotsee/thenmap-js">javascript library for Thenmap</a>.
+            p.lead Use Thenmap.js to embed a historical SVG map on your site. 
+            p We built a super simple <a href="//github.com/rotsee/thenmap-js">javascript library for Thenmap</a> that lets you draw SVG maps with a few lines of code. You can color the map by defining fill colors in a Google spreadsheet.
+            p Look how simple it is:
+            pre
+              code
+                |var settings = {
+                |  dataKey: "1xyNmpKKksy7ZaELB12UY4M2CP0-4EkwO7DWpfu30wsE",
+                |  dataset: "world",
+                |  date: "1949"
+                |}
+                |Thenmap.init("worldmap", settings);
 
-        figure
+        div.col-sm-10.col-sm-offset-1
+          h2 An example: French colonies in 1949
+          figure
             div#worldmap
-            figcaption French colonies in 1949.
 
         script(src="//drvkoaf101245.cloudfront.net/thenmap-1.0.0.min.js")
         script.
+            var container = document.getElementById("worldmap");
+            var containerWidth = container.offsetWidth;
+
             var settings = {
               dataKey: "1xyNmpKKksy7ZaELB12UY4M2CP0-4EkwO7DWpfu30wsE",
               dataset: "world",
               date: "1949",
               language: "en",
               defaultColor: "#333",
-              width:1000,
-              height:400,
+              width:containerWidth,
+              height:containerWidth * 0.4,
             }
             Thenmap.init("worldmap", settings);
 
