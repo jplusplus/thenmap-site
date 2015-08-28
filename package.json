@@ -1,0 +1,16 @@
+{
+  "name": "thenmap-site",
+  "version": "1.0.0",
+  "description": "Landing page for the Thenmap project",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.13.3",
+    "marked": "^0.3.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Journalism++",
+  "license": "MIT"
+}
