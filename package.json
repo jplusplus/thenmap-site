@@ -5,15 +5,13 @@
   "main": "app.js",
   "dependencies": {
     "express": "^4.13.3",
+    "jade": "^1.11.0",
     "marked": "^0.3.5"
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js"
   },
   "author": "Journalism++",
-  "license": "MIT",
-  "scripts": {
-    "start": "node app.js"
-  }
+  "license": "MIT"
 }

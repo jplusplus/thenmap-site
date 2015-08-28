@@ -3,18 +3,17 @@
 var express = require('express')
 
 var app = express()
+app.set('view engine', 'jade')
+app.set('views', __dirname + '/views')
+
+app.get('/', function (req, res) {
+  res.render('index',
+  { title : 'Home' }
+  )
+})
 
 app.get('/', function(req, res) {
-  var fs = require('fs')
-  var marked = require('marked')
-
-  fs.readFile("index.md", 'utf-8', function(err, content){
-    if (err) {
-      return console.log(err);
-    }
-    res.send(marked(content))
-
-  })
+  res.render('index')
 })
 
 // Errors

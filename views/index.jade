@@ -1,0 +1,37 @@
+doctype
+html(lang="en")
+  head
+    title Thenmap
+    meta(name="description", content="Thenmap is a repository for historical geodata.")
+    meta(name="viewport", content="width=device-width")
+    link(rel='stylesheet', href='//leowallentin.se/css/main.min.css')
+    style
+        include style.css
+  body
+    article#main
+        h1 Thenmap
+
+        p.intro Thenmap is a repository for historical borders. You can use it to create historical maps, like the one below.
+
+        p Are you a developer? Check out the <a class="servicelink" href="//api.thenmap.net">Thenmap API</a>, to learn how to fetch the data.
+
+        p Do you want to put a map on your web site? Try out a super simple <a class="servicelink" href="//github.com/rotsee/thenmap-js">javascript library for Thenmap</a>.
+
+        p Looking for the old version of this page? Find it at <a class="servicelink" href="//old.thenmap.net">old.thenmap.net</a>.
+
+        figure
+            div#worldmap
+            figcaption French colonies in 1949.
+
+        script(src="//cdn.thenmap.net/thenmap-1.0.0.min.js")
+        script.
+            var settings = {
+              dataKey: "1xyNmpKKksy7ZaELB12UY4M2CP0-4EkwO7DWpfu30wsE",
+              dataset: "world",
+              date: "1949",
+              language: "en",
+              defaultColor: "#333",
+              width:1000,
+              height:400,
+            }
+            Thenmap.init("worldmap", settings);
