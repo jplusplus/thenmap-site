@@ -44,7 +44,8 @@ app.get('/demo', function(req, res) {
   	    activeDataset: dataset,
   	    datasetInfo: datasetInfo,
   	    date: date,
-  	    activeLanguage: activeLanguage
+  	    activeLanguage: activeLanguage,
+  	    requestedProjection: req.query.projection || ""
       })
     }
   })

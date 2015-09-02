@@ -27,6 +27,11 @@ block content
           option(value=language, selected=language == activeLanguage) #{language}
 
     div
+      label(for="projection") Projection
+      input(name="projection", id="projection", value=requestedProjection)
+      p Recommended projections for this dataset: <code>#{datasetInfo.recommendedProjections}</code>
+
+    div
       input(type='submit',name='btn_submit',value='Show map')
 
   div#demoMap
