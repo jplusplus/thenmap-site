@@ -8,12 +8,6 @@ app.set('views', __dirname + '/views')
 
 app.use(express.static('static'))
 
-app.get('/', function (req, res) {
-  res.render('index',
-  { title : 'Home' }
-  )
-})
-
 app.get('/', function(req, res) {
   res.render('index')
 })
@@ -24,7 +18,7 @@ app.use(function(req, res, next) {
 })
 
 //Start server
-var server = app.listen(process.env.PORT || 3000, function() {
+var server = app.listen(process.env.PORT || 3001, function() {
 
   var host = server.address().address
   var port = server.address().port
