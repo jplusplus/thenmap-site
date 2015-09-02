@@ -1,0 +1,45 @@
+extends ./layout.jade
+
+block title
+  title Demonstrations of thenmap.js
+
+block content
+  h1 thenmap.js
+  p.intro
+    <b>thenmap.js</b> is a simple javascript library for accessing the <a href="//api.thenmap.net">Thenmap API</a>. For the full documentation, please see <a href="https://github.com/rotsee/thenmap-js">github.com/rotsee/thenmap-js</a>.
+
+  form(method='get',name="form")
+    div
+      label(for='dataset') Dataset
+      select(name="dataset",id="dataset",onchange="this.form.submit()")
+        each dataset in availableDatasets
+          option(value=dataset, selected=activeDataset == dataset) #{dataset}
+      p See <a href="//api.thenmap.net#datasets">api.thenmap.net</a> for a description of available datasets
+
+    div
+      label(for="date") Date
+      input(type="date", name="date", id="date" value=date)
+
+    div
+      label(for="language") Language
+      select(name="language", id="language")
+        each language in datasetInfo.languages
+          option(value=language, selected=language == activeLanguage) #{language}
+
+    div
+      input(type='submit',name='btn_submit',value='Show map')
+
+  div#demoMap
+
+  script(src="//drvkoaf101245.cloudfront.net/thenmap-1.0.1.min.js")
+  script var dataset = ""
+  script.
+    var settings = {
+          //dataKey: "1xyNmpKKksy7ZaELB12UY4M2CP0-4EkwO7DWpfu30wsE",
+          dataset: "!{activeDataset}",
+          date: "!{date}",
+          language: "#{activeLanguage}",
+          width:900,
+          height:900,
+        }
+    Thenmap.init("demoMap", settings);
