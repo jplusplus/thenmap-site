@@ -1,16 +1,22 @@
 'use strict'
 
 var express = require('express')
+var favicon = require('serve-favicon');
 
 var app = express()
 app.set('view engine', 'jade')
 app.set('views', __dirname + '/views')
 
 app.use(express.static('static'))
+app.use(favicon(__dirname + '/static/favicons/favicon.ico'))
 
 app.get('/', function(req, res) {
   res.render('index')
 })
+
+/*app.get('/demo', function(req, res) {
+  res.render('demo')
+})*/
 
 // Errors
 app.use(function(req, res, next) {

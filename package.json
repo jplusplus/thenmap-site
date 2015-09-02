@@ -6,7 +6,8 @@
   "dependencies": {
     "express": "^4.13.3",
     "jade": "^1.11.0",
-    "marked": "^0.3.5"
+    "marked": "^0.3.5",
+    "serve-favicon": "^2.3.0"
   },
   "devDependencies": {},
   "scripts": {
