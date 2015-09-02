@@ -64,3 +64,10 @@ footer {
 	clear: both;
 	padding-top: 2em;
 }
+
+label{
+	display: block
+}
+form > div {
+	margin-top: 1em;
+}
