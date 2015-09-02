@@ -33,10 +33,34 @@ pre code {
 		url('//static.jplusplus.se/iconfonts/thenmap.svg?jj7e03#thnmp') format('svg');
 	font-weight: normal;
 	font-style: normal;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 .iconfont{
 	font-family: "thenmap-icon";
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
+}
+
+.jpluspluslogo{
+	font-family: "thenmap-icon";
+    position:relative;
+    margin:0 2em 0 1em;
+    font-size: 1.5em;
+    vertical-align: middle;
+}
+.jpluspluslogo > span {position:absolute;left:0;color:darkgray;}
+.jpluspluslogo > span:first-child {color:#BE1525;}
+.jpluspluslogo > span:last-child {position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;}
+
+.shareicons {
+	font-family: "thenmap-icon";
+	float:right;
+}
+.shareicons a{
+	padding-left: 1em
+}
+
+footer {
+	clear: both;
+	padding-top: 2em;
 }
