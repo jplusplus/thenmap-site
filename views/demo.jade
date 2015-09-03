@@ -34,7 +34,31 @@ block content
     div
       input(type='submit',name='btn_submit',value='Show map')
 
+  h2 Result
   div#demoMap
+
+  h2 thenmap.js settings
+  pre
+    code.prettyprint
+      |var settings = {
+      |  dataset: "!{activeDataset}",
+      |  date: "!{date}"
+      |  language: "#{activeLanguage}",
+      |  projection: "#{requestedProjection}",
+      |  width:900,
+      |  height:900
+      |};
+      |Thenmap.init("map", settings);
+
+  h2 API calls
+  p Geojson:
+    code http://api.thenmap.net/v1/#{activeDataset}/geo/#{date}
+  p Topojson:
+    code http://api.thenmap.net/v1/#{activeDataset}/geo/#{date}?geo_type=topojson
+  p SVG
+    code http://api.thenmap.net/v1/#{activeDataset}/svg/#{date}?projection=#{requestedProjection}
+  p Data
+    code http://api.thenmap.net/v1/#{activeDataset}/data/#{date}?language=#{activeLanguage}
 
   script(src="//drvkoaf101245.cloudfront.net/thenmap-1.0.1.min.js")
   script var dataset = ""
