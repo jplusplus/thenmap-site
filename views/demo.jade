@@ -32,6 +32,13 @@ block content
       p Recommended projections for this dataset: <code>#{datasetInfo.recommendedProjections}</code>
 
     div
+        label(for="width") Width
+        input(name="width", id="width", value=width)
+        label(for="height") Height
+        input(name="height", id="height", value=height)
+        p Size in pixels
+
+    div
       input(type='submit',name='btn_submit',value='Show map')
 
   h2 Result
@@ -45,8 +52,8 @@ block content
       |  date: "!{date}"
       |  language: "#{activeLanguage}",
       |  projection: "#{requestedProjection}",
-      |  width:900,
-      |  height:900
+      |  width:!{width},
+      |  height:!{height}
       |};
       |Thenmap.init("map", settings);
 
@@ -69,7 +76,7 @@ block content
           date: "!{date}",
           language: "#{activeLanguage}",
           projection: "#{requestedProjection}",
-          width:900,
-          height:900,
+          width:!{width},
+          height:!{height},
         }
     Thenmap.init("demoMap", settings);

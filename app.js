@@ -11,7 +11,7 @@ app.set('views', __dirname + '/views')
 app.use(express.static('static'))
 app.use(favicon(__dirname + '/static/favicons/favicon.ico'))
 
-var availableDatasets = ['world-2', 'se-4', 'se-7']
+var availableDatasets = ['world-2', 'se-4', 'se-7', 'fi-8']
 app.get('/demo', function(req, res) {
 
   if (req.query.dataset && (availableDatasets.indexOf(req.query.dataset) > -1)){
@@ -44,6 +44,8 @@ app.get('/demo', function(req, res) {
   	    activeDataset: dataset,
   	    datasetInfo: datasetInfo,
   	    date: date,
+        width: req.query.width || "900",
+        height: req.query.height || "900",
   	    activeLanguage: activeLanguage,
   	    requestedProjection: req.query.projection || datasetInfo.recommendedProjections[0]
       })
