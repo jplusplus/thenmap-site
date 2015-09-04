@@ -71,3 +71,6 @@ label{
 form > div {
 	margin-top: 1em;
 }
+#demoMap{
+	border: 1px solid black;
+}
