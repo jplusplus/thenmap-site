@@ -56,9 +56,9 @@ block content
   p Topojson:
     code http://api.thenmap.net/v1/#{activeDataset}/geo/#{date}?geo_type=topojson
   p SVG
-    code http://api.thenmap.net/v1/#{activeDataset}/svg/#{date}?projection=#{requestedProjection}
+    code http://api.thenmap.net/v1/#{activeDataset}/svg/#{date}?svg_proj=#{requestedProjection}
   p Data
-    code http://api.thenmap.net/v1/#{activeDataset}/data/#{date}?language=#{activeLanguage}
+    code http://api.thenmap.net/v1/#{activeDataset}/data/#{date}?data_lang=#{activeLanguage}
 
   script(src="//drvkoaf101245.cloudfront.net/thenmap-1.0.1.min.js")
   script var dataset = ""
