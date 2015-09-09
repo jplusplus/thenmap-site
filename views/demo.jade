@@ -47,6 +47,7 @@ block content
   h2 thenmap.js settings
   pre
     code.prettyprint
+      |&lt;script src="//drvkoaf101245.cloudfront.net/thenmap-1.0.3.min.js"&gt;&lt;/script&gt;
       |var settings = {
       |  dataset: "!{activeDataset}",
       |  date: "!{date}"
@@ -67,7 +68,7 @@ block content
   p Data
     code http://api.thenmap.net/v1/#{activeDataset}/data/#{date}?data_lang=#{activeLanguage}
 
-  script(src="//drvkoaf101245.cloudfront.net/thenmap-1.0.2.min.js")
+  script(src="//drvkoaf101245.cloudfront.net/thenmap-1.0.3.min.js")
   script var dataset = ""
   script.
     var settings = {
