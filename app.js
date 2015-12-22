@@ -11,7 +11,7 @@ app.set('views', __dirname + '/views')
 app.use(express.static('static'))
 app.use(favicon(__dirname + '/static/favicons/favicon.ico'))
 
-var availableDatasets = ['world-2', 'se-4', 'se-7', 'fi-8']
+var availableDatasets = ['world-2', 'se-4', 'se-7', 'fi-8', 'us-4']
 app.get('/demo', function(req, res) {
 
   if (req.query.dataset && (availableDatasets.indexOf(req.query.dataset) > -1)){
@@ -27,7 +27,11 @@ app.get('/demo', function(req, res) {
   }
   date = date.split("T")[0]
 
-  var apiUrl = "http://api.thenmap.net/v1/" + dataset + "/info"
+  if (app.get('env') === 'development') {
+    var apiUrl = "http://localhost:3000/v1/" + dataset + "/info"
+  } else {
+    var apiUrl = "http://api.thenmap.net/v1/" + dataset + "/info"
+  }
   request(apiUrl, function (error, response, body) {
     if (!error && response.statusCode == 200) {
 
