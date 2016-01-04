@@ -11,7 +11,7 @@ app.set('views', __dirname + '/views')
 app.use(express.static('static'))
 app.use(favicon(__dirname + '/static/favicons/favicon.ico'))
 
-var availableDatasets = ['world-2', 'se-4', 'se-7', 'fi-8', 'us-4']
+var availableDatasets = ['world-2', 'se-4', 'se-7', 'fi-8', 'us-4', 'gl-7']
 app.get('/demo', function(req, res) {
 
   if (req.query.dataset && (availableDatasets.indexOf(req.query.dataset) > -1)){
