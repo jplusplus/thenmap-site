@@ -1,0 +1,83 @@
+extends ./layout.jade
+
+block title
+  title Demonstrations of thenmap.js
+
+block content
+  h1 thenmap.js
+  p.intro
+    <b>thenmap.js</b> is a simple javascript library for accessing the <a href="//api.thenmap.net">Thenmap API</a>. For the full documentation, please see <a href="https://github.com/rotsee/thenmap-js">github.com/rotsee/thenmap-js</a>.
+
+  form(method='get',name="form")
+    div
+      label(for='dataset') Dataset
+      select(name="dataset",id="dataset",onchange="this.form.submit()")
+        each dataset in availableDatasets
+          option(value=dataset, selected=activeDataset == dataset) #{dataset}
+      p See <a href="//api.thenmap.net#datasets">api.thenmap.net</a> for a description of available datasets
+
+    div
+      label(for="date") Date
+      input(type="date", name="date", id="date" value=date)
+
+    div
+      label(for="language") Language
+      select(name="language", id="language")
+        each language in datasetInfo.languages
+          option(value=language, selected=language == activeLanguage) #{language}
+
+    div
+      label(for="projection") Projection
+      input(name="projection", id="projection", value=requestedProjection)
+      p Recommended projections for this dataset: <code>#{datasetInfo.recommendedProjections}</code>
+
+    div
+        label(for="width") Width
+        input(name="width", id="width", value=width)
+        label(for="height") Height
+        input(name="height", id="height", value=height)
+        p Size in pixels
+
+    div
+      input(type='submit',name='btn_submit',value='Show map')
+
+  h2 Result
+  div#demoMap
+
+  h2 thenmap.js settings
+  pre
+    code.prettyprint
+      |&lt;script src="//drvkoaf101245.cloudfront.net/thenmap-1.0.4.min.js"&gt;&lt;/script&gt;
+      |var settings = {
+      |  dataset: "!{activeDataset}",
+      |  date: "!{date}"
+      |  language: "#{activeLanguage}",
+      |  projection: "#{requestedProjection}",
+      |  width:!{width},
+      |  height:!{height}
+      |};
+      |Thenmap.init("map", settings);
+
+  h2 API calls
+  p Geojson:
+    code http://api.thenmap.net/v1/#{activeDataset}/geo/#{date}
+  p Topojson:
+    code http://api.thenmap.net/v1/#{activeDataset}/geo/#{date}?geo_type=topojson
+  p SVG
+    code http://api.thenmap.net/v1/#{activeDataset}/svg/#{date}?svg_proj=#{requestedProjection}
+  p Data
+    code http://api.thenmap.net/v1/#{activeDataset}/data/#{date}?data_lang=#{activeLanguage}
+
+  script(src="//drvkoaf101245.cloudfront.net/thenmap-1.0.4.min.js")
+  script var dataset = ""
+  script.
+    var settings = {
+          //dataKey: "1xyNmpKKksy7ZaELB12UY4M2CP0-4EkwO7DWpfu30wsE",
+          dataset: "!{activeDataset}",
+          date: "!{date}",
+          language: "#{activeLanguage}",
+          projection: "#{requestedProjection}",
+          width:!{width},
+          height:!{height},
+        }
+    Thenmap.init("demoMap", settings);

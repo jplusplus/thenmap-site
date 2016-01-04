@@ -1,90 +1,72 @@
-doctype
-html(lang="en")
-  head
-    title Thenmap
-    meta(name="description", content="Thenmap is a repository for historical geodata.")
-    meta(name="viewport", content="width=device-width")
-    link(rel='stylesheet', href='//maxcdn.bootstrapcdn.com/bootswatch/3.3.5/readable/bootstrap.min.css')
-    link(rel='stylesheet', href='css/main.css')
-    script(src="//cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js")
-  body
-    article#main.container
-        div.jumbotron.col-sm-10.col-sm-offset-1
-          span#logo.icon-map
+extends ./layout.jade
 
-          h1 Thenmap
-          p.intro Thenmap is a repository for historical borders.<br/>You can use it to create historical maps, like the one below.
+block content
+  div.jumbotron.col-sm-10.col-sm-offset-1
+    span#logo.iconfont 🗺
 
-        div.row
-          div.col-sm-5.col-sm-offset-1
-            h2 Thenmap API         
-            p.lead Use the Thenmap API to fetch historical geodata as GeoJSON or TopoJSON, or prerendered maps as SVG files.
-            p Pass a year and preferred coordinate system or projection, and the API will give you all borders in return. Like <a href="//api.thenmap.net/v1/world/geo/1956">the world in 1956</a>, or <a href="//api.thenmap.net/v1/sweden/geo/1979">Swedish municipalities from 1979</a>.
-            p The Thenmap API currently holds:
-              ul
-                li World borders, from 1945
-                li Swedish municipalities, from 1974 (a few borders in southern Sweden still missing from 1973)
-                li Swedish counties, from 1968
-                li Finnish municipalities, from 2011
-                li US states
-                li Municipalities of Greenland since the home rule
+    h1 Thenmap
+    p.intro Thenmap is a repository for historical borders.<br/>You can use it to create historical maps, like the one below.
 
-            p Learn more by reading the <a href="//api.thenmap.net">full documentation</a>.
+  div.row
+    div.col-sm-5.col-sm-offset-1
+      h2 Thenmap API         
+      p.lead Use the Thenmap API to fetch historical geodata as GeoJSON or TopoJSON, or prerendered maps as SVG files.
+      p Pass a year and preferred coordinate system or projection, and the API will give you all borders in return. Like <a href="//api.thenmap.net/v1/world/geo/1956">the world in 1956</a>, or <a href="//api.thenmap.net/v1/sweden/geo/1979">Swedish municipalities from 1979</a>.
+      p The Thenmap API currently holds:
+        ul
+          li World borders, from 1945
+          li Swedish municipalities, from 1974 (a few borders in southern Sweden still missing from 1973)
+          li Swedish counties, from 1968
+          li Finnish municipalities, from 2011
+          li US states
+          li Municipalities of Greenland since the home rule
 
-            form
-              label Choose a map
-                select.form-control
-                  option Countries of the world
-                  option Municipalities of Sweden
+      p Learn more by reading the <a href="//api.thenmap.net">full documentation</a>.
 
+    div.col-sm-5
+      h2 Thenmap.js
+      p.lead Use Thenmap.js to embed a historical SVG map on your site. 
+      p We built a super simple <a href="//github.com/rotsee/thenmap-js">javascript library for Thenmap</a> that lets you draw SVG maps with a few lines of code. You can color the map by defining fill colors in a <a href="https://docs.google.com/spreadsheets/d/1xyNmpKKksy7ZaELB12UY4M2CP0-4EkwO7DWpfu30wsE">Google spreadsheet</a>.
+      p Look how simple it is (draws the map below):
+      pre
+        code.prettyprint
+          |var settings = {
+          |  dataKey: "1xyNmpKKksy7ZaELB12UY4M2CP0-4EkwO7DWpfu30wsE",
+          |  dataset: "world",
+          |  date: "1949"
+          |}
+          |Thenmap.init("worldmap", settings);
+      p Play around with some the settings it the <a href="http://www.thenmap.net/demo">interactive sandbox</a>
 
-          div.col-sm-5
-            h2 Thenmap.js
-            p.lead Use Thenmap.js to embed a historical SVG map on your site. 
-            p We built a super simple <a href="//github.com/rotsee/thenmap-js">javascript library for Thenmap</a> that lets you draw SVG maps with a few lines of code. You can color the map by defining fill colors in a Google spreadsheet.
-            p Look how simple it is (draws the map below):
-            pre
-              code.prettyprint
-                |var settings = {
-                |  dataKey: "1xyNmpKKksy7ZaELB12UY4M2CP0-4EkwO7DWpfu30wsE",
-                |  dataset: "world",
-                |  date: "1949"
-                |}
-                |Thenmap.init("worldmap", settings);
+  div.col-sm-10.col-sm-offset-1
+    h2 An example: French colonies in 1949
+    figure
+      div#worldmap
 
-        div.col-sm-10.col-sm-offset-1
-          h2 An example: French colonies in 1949
-          figure
-            div#worldmap
+  script(src="//drvkoaf101245.cloudfront.net/thenmap-1.0.4.min.js")
+  script.
+      var container = document.getElementById("worldmap");
+      var containerWidth = container.offsetWidth;
 
-        script(src="//drvkoaf101245.cloudfront.net/thenmap-1.0.0.min.js")
-        script.
-            var container = document.getElementById("worldmap");
-            var containerWidth = container.offsetWidth;
+      var settings = {
+        dataKey: "1xyNmpKKksy7ZaELB12UY4M2CP0-4EkwO7DWpfu30wsE",
+        dataset: "world",
+        date: "1949",
+        language: "en",
+        defaultColor: "#333",
+        width:containerWidth,
+        height:containerWidth * 0.4,
+      }
+      Thenmap.init("worldmap", settings);
 
-            var settings = {
-              dataKey: "1xyNmpKKksy7ZaELB12UY4M2CP0-4EkwO7DWpfu30wsE",
-              dataset: "world",
-              date: "1949",
-              language: "en",
-              defaultColor: "#333",
-              width:containerWidth,
-              height:containerWidth * 0.4,
-            }
-            Thenmap.init("worldmap", settings);
+  div.col-sm-10.col-sm-offset-1
+    h2 Credits, copyright and licensing
+    p Thenmap is built by <a href="//leowallentin.se">Leo Wallentin</a> from <a href="//jplusplus.se">Journalism++ Stockholm</a>, Danny Mallas Pereira and <a href="//twitter.com/jensfinnas">Jens Finnäs</a>.
+    p And extra applause: <a href="//www.iis.se/">Internetstiftelsen</a> has been kind enough to <a href="https://www.iis.se/blogg/nio-internetframjande-projekt-far-pengar-av-se/">support this project</a>.
 
-        div.col-sm-10.col-sm-offset-1
-          h2 Credits, copyright and licensing
-          p Thenmap is built by <a href="//leowallentin.se">Leo Wallentin</a> from <a href="//jplusplus.se">Journalism++ Stockholm</a>, Danny Mallas Pereira and <a href="//twitter.com/jensfinnas">Jens Finnäs</a>.
-          p And extra applause: <a href="//www.iis.se/">Internetstiftelsen</a> has been kind enough to <a href="https://www.iis.se/blogg/nio-internetframjande-projekt-far-pengar-av-se/">support this project</a>.
-
-          h2 Contribute
-          p Fill me in!
+    h2 Contribute
+    p Found an error? Report in on <a href="https://trello.com/b/aqFu3s1d/thenmap">our Trello board</a>!
 
 
-        div.col-sm-10.col-sm-offset-1
-          small Looking for the old version of this page? Find it at <a class="servicelink" href="//old.thenmap.net">old.thenmap.net</a>.
-
-//-    <a href="https://github.com/jplusplus/thenmap-api"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/a6677b08c955af8400f44c6298f40e7d19cc5b2d/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677261795f3664366436642e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png"></a>
-
-//-     script(src="//cdn.thenmap.net/thenmap-1.0.0.min.js")
+  div.col-sm-10.col-sm-offset-1
+    small Looking for the old version of this page? Find it at <a class="servicelink" href="//old.thenmap.net">old.thenmap.net</a>.
