@@ -51,7 +51,8 @@ app.get('/demo', function(req, res) {
         width: req.query.width || "900",
         height: req.query.height || "900",
   	    activeLanguage: activeLanguage,
-  	    requestedProjection: req.query.projection || datasetInfo.recommendedProjections[0]
+  	    requestedProjection: req.query.projection || datasetInfo.recommendedProjections[0],
+        env: app.get('env')
       })
     }
   })

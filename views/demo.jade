@@ -68,7 +68,12 @@ block content
   p Data
     code http://api.thenmap.net/v1/#{activeDataset}/data/#{date}?data_lang=#{activeLanguage}
 
-  script(src="//drvkoaf101245.cloudfront.net/thenmap-1.0.4.min.js")
+  if env == 'development'
+    script(src="//drvkoaf101245.cloudfront.net/thenmap-1.0.4.min.js")
+    script.
+      Thenmap.debug=true;
+  else
+    script(src="//drvkoaf101245.cloudfront.net/thenmap-1.0.4.min.js")
   script var dataset = ""
   script.
     var settings = {
