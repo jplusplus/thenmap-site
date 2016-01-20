@@ -42,6 +42,10 @@ app.get('/demo', function(req, res) {
 	  } else {
 		var activeLanguage = datasetInfo.defaultLanguage
 	  }
+    var projection = req.query.projection || datasetInfo.recommendedProjections[0]
+    if (datasetInfo.recommendedProjections.indexOf(projection) === -1){
+      projection = datasetInfo.recommendedProjections[0]
+    }
 
       res.render('demo',{
   	    availableDatasets: availableDatasets,
@@ -51,7 +55,7 @@ app.get('/demo', function(req, res) {
         width: req.query.width || "900",
         height: req.query.height || "900",
   	    activeLanguage: activeLanguage,
-  	    requestedProjection: req.query.projection || datasetInfo.recommendedProjections[0],
+  	    requestedProjection: projection,
         env: app.get('env')
       })
     }
