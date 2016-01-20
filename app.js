@@ -44,7 +44,11 @@ app.get('/demo', function(req, res) {
 	  }
     var projection = req.query.projection || datasetInfo.recommendedProjections[0]
     if (datasetInfo.recommendedProjections.indexOf(projection) === -1){
-      projection = datasetInfo.recommendedProjections[0]
+      if (req.query.allow_all){
+
+      } else {
+        projection = datasetInfo.recommendedProjections[0]
+      }
     }
 
       res.render('demo',{
@@ -56,7 +60,8 @@ app.get('/demo', function(req, res) {
         height: req.query.height || "900",
   	    activeLanguage: activeLanguage,
   	    requestedProjection: projection,
-        env: app.get('env')
+        env: app.get('env'),
+        allow_all: req.query.allow_all || ""
       })
     }
   })

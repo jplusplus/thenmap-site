@@ -30,6 +30,9 @@ block content
       label(for="projection") Projection
       input(name="projection", id="projection", value=requestedProjection)
       p Recommended projections for this dataset: <code>#{datasetInfo.recommendedProjections}</code>
+      small
+        label(for="allow_all") Allow non recommended projections?
+          input(type="checkbox", name="allow_all", id="allow_all", checked=(allow_all === "on"), style="margin-left:.8em")
 
     div
         label(for="width") Width
