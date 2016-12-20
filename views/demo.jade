@@ -42,7 +42,12 @@ block content
         p Size in pixels
 
     div
-      input(type='submit',name='btn_submit',value='Show map')
+        label(for="dataKey") Datakey (Google sheets ID)
+        input(name="dataKey", id="dataKey", value=activeDatakey)
+        p See the #[a(href="https://docs.google.com/spreadsheets/d/1dj8qw3I75qudflfkr4wBDipeehnecsSslemkn2j5qRE/edit?usp=sharing") sample doument].
+
+    div
+      input(type='submit', value='Show map')
 
   h2 Result
   div#demoMap
@@ -50,8 +55,9 @@ block content
   h2 thenmap.js settings
   pre
     code.prettyprint
-      |&lt;script src="//drvkoaf101245.cloudfront.net/thenmap-1.0.4.min.js"&gt;&lt;/script&gt;
+      |&lt;script src="//drvkoaf101245.cloudfront.net/thenmap-1.0.5.min.js"&gt;&lt;/script&gt;
       |var settings = {
+      |  dataKey: "!{activeDatakey}",
       |  dataset: "!{activeDataset}",
       |  date: "!{date}"
       |  language: "#{activeLanguage}",
@@ -72,15 +78,15 @@ block content
     code http://api.thenmap.net/v1/#{activeDataset}/data/#{date}?data_lang=#{activeLanguage}&data_props=name|is_in|etc...
 
   if env == 'development'
-    script(src="/js/thenmap-1.0.4.min.js")
+    script(src="/js/thenmap-1.0.5.min.js")
     script.
       Thenmap.debug=true;
   else
-    script(src="//drvkoaf101245.cloudfront.net/thenmap-1.0.4.min.js")
+    script(src="//drvkoaf101245.cloudfront.net/thenmap-1.0.5.min.js")
   script var dataset = ""
   script.
     var settings = {
-          //dataKey: "1xyNmpKKksy7ZaELB12UY4M2CP0-4EkwO7DWpfu30wsE",
+          dataKey: "!{activeDatakey}",
           dataset: "!{activeDataset}",
           date: "!{date}",
           language: "#{activeLanguage}",

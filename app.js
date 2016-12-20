@@ -58,6 +58,7 @@ app.get('/demo', function(req, res) {
   	    date: date,
         width: req.query.width || "900",
         height: req.query.height || "900",
+        activeDatakey: req.query.dataKey || "",
   	    activeLanguage: activeLanguage,
   	    requestedProjection: projection,
         env: app.get('env'),
