@@ -55,8 +55,10 @@ block content
   div#demoMap
 
   h2 thenmap.js settings
+  p Use the below code to put this map on a web page.
   pre
     code.prettyprint
+      |&lt;div id="map"&gt;&lt;/div&gt;
       |&lt;script src="//drvkoaf101245.cloudfront.net/thenmap-1.0.5.min.js"&gt;&lt;/script&gt;
       |var settings = {
       |  dataKey: "!{activeDatakey}",
@@ -70,6 +72,7 @@ block content
       |Thenmap.init("map", settings);
 
   h2 API calls
+  p Use one these API endpoints to fetch data to produce the map above. See #[a(href="http://api.thenmap.net/") the API documentation] for details.
   p Geojson:
     code http://api.thenmap.net/v1/#{activeDataset}/geo/#{date}
   p Topojson:
