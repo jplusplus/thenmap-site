@@ -11,7 +11,7 @@ app.set('views', __dirname + '/views')
 app.use(express.static('static'))
 app.use(favicon(__dirname + '/static/favicons/favicon.ico'))
 
-var availableDatasets = ['world-2', 'se-4', 'se-7', 'fi-8', 'us-4', 'gl-7', 'ch-8']
+var availableDatasets = ['world-2', 'se-4', 'se-7', 'no-7', 'fi-8', 'us-4', 'gl-7', 'ch-8']
 app.get('/demo', function(req, res) {
 
   if (req.query.dataset && (availableDatasets.indexOf(req.query.dataset) > -1)){
@@ -62,11 +62,31 @@ app.get('/demo', function(req, res) {
   	    activeLanguage: activeLanguage,
   	    requestedProjection: projection,
         env: app.get('env'),
-        allow_all: req.query.allow_all || ""
+        allow_all: req.query.allow_all || "",
+        queryString: [
+          "dataKey="+(req.query.dataKey || ""),
+          "dataset="+dataset,
+          "date="+date,
+          "language="+activeLanguage,
+          "projection="+projection,
+          "width="+(req.query.width || "900"),
+          "height="+(req.query.height || "900")].join("&")
       })
     }
   })
 
+})
+
+app.get('/clean', function(req, res) {
+    res.render('clean',{
+    activeDataset: req.query.dataset,
+    date: req.query.date,
+    width: req.query.width || "900",
+    height: req.query.height || "900",
+    activeDatakey: req.query.dataKey || "",
+    activeLanguage: req.query.language,
+    requestedProjection: req.query.projection,
+  })
 })
 
 app.get('/', function(req, res) {
