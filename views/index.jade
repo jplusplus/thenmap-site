@@ -50,22 +50,25 @@ block content
         p Pass a date and optionally a preferred coordinate system or projection, and the API will give you all borders in return. Like #[object #[a(href="//api.thenmap.net/v1/world/geo/1956") the world in 1956]], or #[object #[a( href="//api.thenmap.net/v1/sweden/geo/1979") Swedish municipalities from 1979]].
         p The Thenmap API currently holds world borders (1945&ndash;), Swedish municipalities (1974&ndash;) and counties (1968&ndash;), Finnish municipalities (2010&ndash;2017), US states (1865&ndash;), Norwegian municipalities (2012&ndash;2017), Municipalities of Greenland (1979&ndash;) and Municipalities of Switzerland (2010&ndash;2017).
         p.linkin
-          object #[a(href="http://api.thenmap.net") Full documentation &rarr;]
+          object #[a(href="http://api.thenmap.net") API documentation &rarr;]
 
-    div.col-sm-5
-      h2 Thenmap.js
-      p.lead Use Thenmap.js to put simple, dynamic SVG maps on your site. 
-      p We built a super simple <a href="//github.com/rotsee/thenmap-js">javascript library for Thenmap</a> that lets you draw SVG maps with a few lines of code. You can color the map by defining fill colors in a <a href="https://docs.google.com/spreadsheets/d/1xyNmpKKksy7ZaELB12UY4M2CP0-4EkwO7DWpfu30wsE">Google spreadsheet</a>.
-      p This code draws the map above.
-      pre
-        code.prettyprint(style="word-wrap: break-word;")
-          |var settings = {
-          |  dataKey: "1xyNmpKKksy7ZaELB12UY4M2CP0-4EkwO7DWpfu30wsE",
-          |  dataset: "world",
-          |  date: "1949"
-          |}
-          |Thenmap.init("worldmap", settings);
-      p Play around with some of the settings in the <a href="http://www.thenmap.net/demo">interactive sandbox</a>
+    a(href="https://github.com/rotsee/thenmap-js").unlink
+      div.col-sm-5
+        h2 Thenmap.js
+        p.lead Use Thenmap.js to put simple, dynamic SVG maps on your site. 
+        p Thenmap.js is a super simple javascript library that lets you draw SVG maps with a few lines of code. You can color the map by defining fill colors in a #[object #[a(href="https://docs.google.com/spreadsheets/d/1xyNmpKKksy7ZaELB12UY4M2CP0-4EkwO7DWpfu30wsE") Google spreadsheet]].
+        p This code draws the map above.
+        pre
+          code.prettyprint(style="word-wrap: break-word;")
+            |var settings = {
+            |  dataKey: "1xyNmpKKksy7ZaELB12UY4M2CP0-4EkwO7DWpfu30wsE",
+            |  dataset: "world",
+            |  date: "1949"
+            |}
+            |Thenmap.init("worldmap", settings);
+        p Play around with the settings in the #[object #[a(href="/demo") interactive sandbox]]
+        p.linkin
+          object #[a(href="https://github.com/rotsee/thenmap-js") Thenmap.js documentation &rarr;]
 
   div.row
     div.col-sm-5.col-sm-offset-1
@@ -79,8 +82,8 @@ block content
       p Minor border fixes and translations are added continuously. This is a list of major changes:
       ul
         li 2016-12-20: Added Norwegian municipalities (#[code no-7])
-        li 2016-12-19: Swiss municipality chnages in 2017 (#[code ch-8])
-        li 2016-12-18: Finnish municipality chnages in 2017 (#[code fi-8])
+        li 2016-12-19: Swiss municipality changes in 2017 (#[code ch-8])
+        li 2016-12-18: Finnish municipality changes in 2017 (#[code fi-8])
         li 2016-07-07: Major cleanup of world borders (#[code world-2])
         li 2016-03-16: Added variants for Moldova: With and without Transnistria (#[code world-2])
 
