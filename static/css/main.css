@@ -115,3 +115,28 @@ nav ul li a:hover, nav ul li a:active {
 	color: #fff;
 	background-color: #7645d9;
 }
+
+.linkin {
+	text-align:right;
+	padding-right:1em;
+	font-weight: bolder;
+}
+a.unlink {
+  color: inherit;
+}
+object a:hover {
+  text-decoration: underline;
+}
+
+a.unlink:hover {
+  color: inherit;
+}
+a.unlink:hover {
+  text-decoration: none;
+}
+a.unlink:active div {
+  outline: 1px solid #492A85;
+}
+a.unlink:hover h2 {
+  text-decoration: underline;
+}
