@@ -89,6 +89,26 @@ app.get('/clean', function(req, res) {
   })
 })
 
+app.get('/svg', function(req, res) {
+  var queryString = [
+    "language="+req.query.language,
+    "projection="+req.query.projection,
+    "width="+(req.query.width || "900"),
+    "height="+(req.query.height || "900")].join("&")
+  if (app.get('env') === 'development') {
+    var apiUrl = "http://localhost:3000/v1/" + req.query.dataset + "/svg/" + req.query.date
+  } else {
+    var apiUrl = "http://api.thenmap.net/v1/" + req.query.dataset + "/svg/" + req.query.date
+  }
+  request(apiUrl, function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+      res.setHeader('Content-Type', 'aimage/svg+xml');
+      res.end(JSON.parse(body).svg)
+    }
+  })
+
+})
+
 app.get('/', function(req, res) {
   res.render('index')
 })
