@@ -33,10 +33,10 @@ block content
       datalist#projections
         each projection in datasetInfo.recommendedProjections
           option(value=projection)
-      p Recommended projections for this dataset: <code>#{datasetInfo.recommendedProjections}</code>
-      small
-        label(for="allow_all") Allow non recommended projections?
-          input(type="checkbox", name="allow_all", id="allow_all", checked=(allow_all === "on"), style="margin-left:.8em").checkbox.form-control.input-small
+      p Recommended projections for this dataset: !{t.arrayText(datasetInfo.recommendedProjections, null, ["code", {class: "selectonclick"}])}
+        small
+          label(for="allow_all") Allow non recommended projections?
+            input(type="checkbox", name="allow_all", id="allow_all", checked=(allow_all === "on"), style="margin-left:.8em").checkbox.form-control.input-small
 
     div.form-group.form-group.form-inline
         label(for="width") Width
@@ -82,13 +82,13 @@ block content
   section.col-sm-10.col-sm-offset-1
     h2 API calls
     p Use one these API endpoints to fetch data to produce the map above. See #[a(href="http://api.thenmap.net/") the API documentation] for details.
-    p Geojson:
+    p Geojson: 
       code http://api.thenmap.net/v1/#{activeDataset}/geo/#{date}
-    p Topojson:
+    p Topojson: 
       code http://api.thenmap.net/v1/#{activeDataset}/geo/#{date}?geo_type=topojson
-    p SVG
+    p SVG: 
       code http://api.thenmap.net/v1/#{activeDataset}/svg/#{date}?svg_proj=#{requestedProjection}
-    p Data
+    p Data: 
       code http://api.thenmap.net/v1/#{activeDataset}/data/#{date}?data_lang=#{activeLanguage}&data_props=name|is_in|etc...
 
   if env == 'development'
@@ -109,3 +109,26 @@ block content
           height:!{height},
         }
     Thenmap.init("demoMap", settings);
+  script.
+    function selectText(element) {
+      var doc = document;
+
+      if (doc.body.createTextRange) { // ms
+        var range = doc.body.createTextRange();
+        range.moveToElementText(element);
+        range.select();
+      } else if (window.getSelection) { // moz, opera, webkit
+        var selection = window.getSelection();            
+        var range = doc.createRange();
+        range.selectNodeContents(element);
+        selection.removeAllRanges();
+        selection.addRange(range);
+      }
+    }
+    var elements = document.getElementsByClassName('selectonclick');
+    /* IE8 not supported, because we use SVG anyway */
+    for (var i=0;i<elements.length;i++){
+      elements[i].addEventListener("click", function(){
+        selectText(this);
+      }, false);
+    }
