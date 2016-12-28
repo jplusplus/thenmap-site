@@ -1,8 +1,9 @@
 'use strict'
 
 var express = require('express')
-var favicon = require('serve-favicon');
-var request = require('request');
+var favicon = require('serve-favicon')
+var request = require('request')
+var textFunctions = require('./lib/text-functions')("en-GB")
 
 var app = express()
 app.set('view engine', 'jade')
@@ -11,7 +12,7 @@ app.set('views', __dirname + '/views')
 app.use(express.static('static'))
 app.use(favicon(__dirname + '/static/favicons/favicon.ico'))
 
-var availableDatasets = ['world-2', 'se-4', 'se-7', 'no-7', 'fi-8', 'us-4', 'gl-7', 'ch-8']
+var availableDatasets = ['world-2', 'se-4', 'se-7', 'no-7', 'fi-8', 'us-4', 'gl-7', 'ch-8', 'dk-7']
 app.get('/demo', function(req, res) {
 
   if (req.query.dataset && (availableDatasets.indexOf(req.query.dataset) > -1)){
@@ -50,7 +51,6 @@ app.get('/demo', function(req, res) {
         projection = datasetInfo.recommendedProjections[0]
       }
     }
-
       res.render('demo',{
   	    availableDatasets: availableDatasets,
   	    activeDataset: dataset,
@@ -70,7 +70,8 @@ app.get('/demo', function(req, res) {
           "language="+activeLanguage,
           "projection="+projection,
           "width="+(req.query.width || "900"),
-          "height="+(req.query.height || "900")].join("&")
+          "height="+(req.query.height || "900")].join("&"),
+        t: textFunctions,
       })
     }
   })
