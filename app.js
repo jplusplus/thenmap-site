@@ -16,15 +16,15 @@ var availableDatasets = ['world-2', 'se-4', 'se-7', 'no-7', 'fi-8', 'us-4', 'gl-
 app.get('/demo', function(req, res) {
 
   if (req.query.dataset && (availableDatasets.indexOf(req.query.dataset) > -1)){
-  	var dataset = req.query.dataset
+    var dataset = req.query.dataset
   } else {
-	var dataset = availableDatasets[0]
+  var dataset = availableDatasets[0]
   }
 
   if (req.query.date){
-  	var date = new Date(req.query.date).toISOString()
+    var date = new Date(req.query.date).toISOString()
   } else {
-	var date = new Date().toISOString()
+  var date = new Date().toISOString()
   }
   date = date.split("T")[0]
 
@@ -38,11 +38,11 @@ app.get('/demo', function(req, res) {
 
       var datasetInfo = JSON.parse(body).info
 
-	  if (req.query.language && (datasetInfo.languages.indexOf(req.query.language) > -1)){
-	  	var activeLanguage = req.query.language
-	  } else {
-		var activeLanguage = datasetInfo.defaultLanguage
-	  }
+    if (req.query.language && (datasetInfo.languages.indexOf(req.query.language) > -1)){
+      var activeLanguage = req.query.language
+    } else {
+    var activeLanguage = datasetInfo.defaultLanguage
+    }
     var projection = req.query.projection || datasetInfo.recommendedProjections[0]
     if (datasetInfo.recommendedProjections.indexOf(projection) === -1){
       if (req.query.allow_all){
@@ -52,15 +52,15 @@ app.get('/demo', function(req, res) {
       }
     }
       res.render('demo',{
-  	    availableDatasets: availableDatasets,
-  	    activeDataset: dataset,
-  	    datasetInfo: datasetInfo,
-  	    date: date,
+        availableDatasets: availableDatasets,
+        activeDataset: dataset,
+        datasetInfo: datasetInfo,
+        date: date,
         width: req.query.width || "900",
         height: req.query.height || "900",
         activeDatakey: req.query.dataKey || "",
-  	    activeLanguage: activeLanguage,
-  	    requestedProjection: projection,
+        activeLanguage: activeLanguage,
+        requestedProjection: projection,
         env: app.get('env'),
         allow_all: req.query.allow_all || "",
         queryString: [
