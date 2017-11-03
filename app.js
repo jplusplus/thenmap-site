@@ -31,12 +31,17 @@ app.get('/demo', function(req, res) {
   if (app.get('env') === 'development') {
     var apiUrl = "http://localhost:3000/v2/" + dataset + "/info"
   } else {
-    var apiUrl = "http://api.thenmap.net/v2/" + dataset + "/info"
+    var apiUrl = "http://api.thenmap.net/v1/" + dataset + "/info"
   }
   request(apiUrl, function (error, response, body) {
+    if (error) {
+      console.log(error)
+      return next(error)
+    }
+
     if (!error && response.statusCode == 200) {
 
-      var datasetInfo = JSON.parse(body)
+      var datasetInfo = JSON.parse(body)["info"]
 
     if (req.query.language && (datasetInfo.languages.indexOf(req.query.language) > -1)){
       var activeLanguage = req.query.language
@@ -99,12 +104,12 @@ app.get('/svg', function(req, res) {
   if (app.get('env') === 'development') {
     var apiUrl = "http://localhost:3000/v2/" + req.query.dataset + "/svg/" + req.query.date
   } else {
-    var apiUrl = "http://api.thenmap.net/v2/" + req.query.dataset + "/svg/" + req.query.date
+    var apiUrl = "http://api.thenmap.net/v1/" + req.query.dataset + "/svg/" + req.query.date
   }
   request(apiUrl, function (error, response, body) {
     if (!error && response.statusCode == 200) {
       res.setHeader('Content-Type', 'image/svg+xml')
-      res.end(body)
+      res.end(body["svg"])
     }
   })
 
