@@ -65,7 +65,7 @@ block content
     h2 thenmap.js settings
     p Use the below code to put this map on a web page.
     pre
-      code.prettyprint
+      code.prettyprint.lang-html
         |&lt;div id="map"&gt;&lt;/div&gt;
         |&lt;script src="//drvkoaf101245.cloudfront.net/thenmap-1.0.5.min.js"&gt;&lt;/script&gt;
         |var settings = {
@@ -82,13 +82,13 @@ block content
   section.col-sm-10.col-sm-offset-1
     h2 API calls
     p Use one these API endpoints to fetch data to produce the map above. See #[a(href="http://api.thenmap.net/") the API documentation] for details.
-    p Geojson: 
+    p Geojson:
       code.selectonclick http://api.thenmap.net/v1/#{activeDataset}/geo/#{date}
-    p Topojson: 
+    p Topojson:
       code.selectonclick http://api.thenmap.net/v1/#{activeDataset}/geo/#{date}?geo_type=topojson
-    p SVG: 
+    p SVG:
       code.selectonclick http://api.thenmap.net/v1/#{activeDataset}/svg/#{date}?svg_proj=#{requestedProjection}
-    p Data: 
+    p Data:
       code.selectonclick http://api.thenmap.net/v1/#{activeDataset}/data/#{date}?data_lang=#{activeLanguage}&data_props=name|is_in|etc...
 
   if env == 'development'
@@ -118,7 +118,7 @@ block content
         range.moveToElementText(element);
         range.select();
       } else if (window.getSelection) { // moz, opera, webkit
-        var selection = window.getSelection();            
+        var selection = window.getSelection();
         var range = doc.createRange();
         range.selectNodeContents(element);
         selection.removeAllRanges();
