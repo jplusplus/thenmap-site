@@ -45,7 +45,7 @@ block content
   div.row
     a(href="http://api.thenmap.net").unlink
       div.col-sm-5.col-sm-offset-1
-        h2 Thenmap API         
+        h2 Thenmap API
         p.lead Use the Thenmap API to fetch geodata as GeoJSON or TopoJSON, prerendered maps as SVG files, or metadata.
         p Pass a date and optionally a preferred coordinate system or projection, and the API will give you all borders in return. Like #[object #[a(href="//api.thenmap.net/v1/world/geo/1956") the world in 1956]], or #[object #[a( href="//api.thenmap.net/v1/sweden/geo/1979") Swedish municipalities from 1979]].
         p The Thenmap API currently holds world borders (1945&ndash;), Swedish municipalities (1974&ndash;) and counties (1968&ndash;), Finnish municipalities (2010&ndash;2017), US states (1865&ndash;), Norwegian municipalities (2006&ndash;2017), Municipalities of Greenland (1979&ndash;) and Municipalities of Switzerland (2010&ndash;2017).
@@ -55,7 +55,7 @@ block content
     a(href="https://github.com/rotsee/thenmap-js").unlink
       div.col-sm-5
         h2 Thenmap.js
-        p.lead Use Thenmap.js to put simple, dynamic SVG maps on your site. 
+        p.lead Use Thenmap.js to put simple, dynamic SVG maps on your site.
         p Thenmap.js is a super simple javascript library that lets you draw SVG maps with a few lines of code. You can color the map by defining fill colors in a #[object #[a(href="https://docs.google.com/spreadsheets/d/1xyNmpKKksy7ZaELB12UY4M2CP0-4EkwO7DWpfu30wsE") Google spreadsheet]].
         p This code draws the map above.
         pre
@@ -95,10 +95,11 @@ block content
       h2 Latest changes
       p Minor border fixes and translations are added continuously. This is a list of major changes:
       ul
+        li 2017-11-03: Norwegian border changes due in 2018 (#[code no-7])
         li 2017-01-27: Added Danish municipalities (#[code dk-7])
         li 2016-12-20: Added Norwegian municipalities (#[code no-7])
-        li 2016-12-19: Swiss municipality changes in 2017 (#[code ch-8])
-        li 2016-12-18: Finnish municipality changes in 2017 (#[code fi-8])
+        li 2016-12-19: Swiss municipality changes due in 2017 (#[code ch-8])
+        li 2016-12-18: Finnish municipality changes due in 2017 (#[code fi-8])
         li 2016-07-07: Major cleanup of world borders (#[code world-2])
         li 2016-03-16: Added variants for Moldova: With and without Transnistria (#[code world-2])
 
@@ -120,7 +121,7 @@ block content
         range.moveToElementText(element);
         range.select();
       } else if (window.getSelection) { // moz, opera, webkit
-        var selection = window.getSelection();            
+        var selection = window.getSelection();
         var range = doc.createRange();
         range.selectNodeContents(element);
         selection.removeAllRanges();
