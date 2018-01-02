@@ -26,7 +26,8 @@ block content
       h2 An example: French colonies in 1949
       figure
         div#worldmap
-      script(src="//drvkoaf101245.cloudfront.net/thenmap-1.0.5.min.js")
+      script(src="//drvkoaf101245.cloudfront.net/thenmap-1.0.6.min.js")
+      //-script(src="/js/thenmap-1.0.6.js")
       script.
           var container = document.getElementById("worldmap");
           var containerWidth = container.offsetWidth;
@@ -34,7 +35,7 @@ block content
           var settings = {
             dataKey: "1xyNmpKKksy7ZaELB12UY4M2CP0-4EkwO7DWpfu30wsE",
             dataset: "world",
-            date: "1949",
+            date: "1949-05-06",
             language: "en",
             defaultColor: "#333",
             width:containerWidth,
@@ -55,17 +56,21 @@ block content
     a(href="https://github.com/rotsee/thenmap-js").unlink
       div.col-sm-5
         h2 Thenmap.js
-        p.lead Use Thenmap.js to put simple, dynamic SVG maps on your site.
-        p Thenmap.js is a super simple javascript library that lets you draw SVG maps with a few lines of code. You can color the map by defining fill colors in a #[object #[a(href="https://docs.google.com/spreadsheets/d/1xyNmpKKksy7ZaELB12UY4M2CP0-4EkwO7DWpfu30wsE") Google spreadsheet]].
+        p.lead Lightweight JS library for simple maps
+        p You can color the map by defining fill colors in a #[object #[a(href="https://docs.google.com/spreadsheets/d/1xyNmpKKksy7ZaELB12UY4M2CP0-4EkwO7DWpfu30wsE") Google spreadsheet]].
         p This code draws the map above.
         pre
-          code.prettyprint(style="word-wrap: break-word;")
+          code.prettyprint(style="white-space: pre")
+            |&lt;div id="worldmap">&lt;/div>
+            |&lt;script src="https://drvkoaf101245.cloudfront.net/thenmap-1.0.6.min.js">&lt;/script>
+            |&lt;script>
             |var settings = {
-            |  dataKey: "1xyNmpKKksy7ZaELB12UY4M2CP0-4EkwO7DWpfu30wsE",
-            |  dataset: "world",
-            |  date: "1949"
+            |    dataKey: "1xyNmpKKksy7ZaELB12UY4M2CP0-4EkwO7DWpfu30wsE",
+            |    dataset: "world",
+            |    date: "1949-05-06"
             |}
             |Thenmap.init("worldmap", settings);
+            |&lt;/script>
         p Play around with the settings in the #[object #[a(href="/demo") interactive sandbox]]
         p.linkin
           object #[a(href="https://github.com/rotsee/thenmap-js") Thenmap.js documentation &rarr;]
