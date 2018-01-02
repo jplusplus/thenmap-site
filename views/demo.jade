@@ -67,7 +67,7 @@ block content
     pre
       code.prettyprint.lang-html
         |&lt;div id="map"&gt;&lt;/div&gt;
-        |&lt;script src="//drvkoaf101245.cloudfront.net/thenmap-1.0.5.min.js"&gt;&lt;/script&gt;
+        |&lt;script src="//drvkoaf101245.cloudfront.net/thenmap-1.0.6.min.js"&gt;&lt;/script&gt;
         |var settings = {
         |  dataKey: "!{activeDatakey}",
         |  dataset: "!{activeDataset}",
@@ -92,11 +92,11 @@ block content
       code.selectonclick http://api.thenmap.net/v1/#{activeDataset}/data/#{date}?data_lang=#{activeLanguage}&data_props=name|is_in|etc...
 
   if env == 'development'
-    script(src="/js/thenmap-1.0.5.min.js")
+    script(src="/js/thenmap-1.0.6.min.js")
     script.
       Thenmap.debug=true;
   else
-    script(src="//drvkoaf101245.cloudfront.net/thenmap-1.0.5.min.js")
+    script(src="//drvkoaf101245.cloudfront.net/thenmap-1.0.6.min.js")
   script var dataset = ""
   script.
     var settings = {
