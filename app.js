@@ -1,9 +1,9 @@
 'use strict'
 
-var express = require('express')
-var favicon = require('serve-favicon')
-var request = require('request')
-var textFunctions = require('./lib/text-functions')("en-GB")
+const express = require('express')
+const favicon = require('serve-favicon')
+const textFunctions = require('./lib/text-functions')("en-GB")
+const request = require('request')
 
 var app = express()
 app.set('view engine', 'jade')
@@ -12,26 +12,36 @@ app.set('views', __dirname + '/views')
 app.use(express.static('static'))
 app.use(favicon(__dirname + '/static/favicons/favicon.ico'))
 
-var availableDatasets = ['world-2', 'se-4', 'se-7', 'no-7', 'fi-8', 'us-4', 'gl-7', 'ch-8', 'dk-7']
+const availableDatasets = {
+  'world-2' : "World (nations)",
+  'se-4': "Sweden (counties)",
+  'se-7': "Sweden (municipalities)",
+  'no-7': "Norway (municipalities)",
+  'fi-8': "Finland (municipalities)",
+  'us-4': "United States (states)",
+  'gl-7': "Greenland (municipalities)",
+  'ch-8': "Switzerland (municipalities)",
+  'dk-7': "Denmark (municipalities)",
+}
 app.get('/demo', function(req, res) {
 
-  if (req.query.dataset && (availableDatasets.indexOf(req.query.dataset) > -1)){
+  if ((req.query.dataset) && (req.query.dataset in availableDatasets)) {
     var dataset = req.query.dataset
   } else {
-  var dataset = availableDatasets[0]
+    var dataset = Object.keys(availableDatasets)[0]
   }
 
   if (req.query.date){
     var date = new Date(req.query.date).toISOString()
   } else {
-  var date = new Date().toISOString()
+    var date = new Date().toISOString()
   }
   date = date.split("T")[0]
 
   if (app.get('env') === 'development') {
-    var apiUrl = "http://localhost:3000/v2/" + dataset + "/info"
+    var apiUrl = `http://localhost:3000/v2/${dataset}/info/${date}`
   } else {
-    var apiUrl = "http://api.thenmap.net/v1/" + dataset + "/info"
+    var apiUrl = `http://api.thenmap.net/v2/${dataset}/info/${date}`
   }
   request(apiUrl, function (error, response, body) {
     if (error) {
@@ -39,20 +49,16 @@ app.get('/demo', function(req, res) {
       return next(error)
     }
 
-    if (!error && response.statusCode == 200) {
+    let datasetInfo = JSON.parse(body)
 
-      var datasetInfo = JSON.parse(body)["info"]
-
-    if (req.query.language && (datasetInfo.languages.indexOf(req.query.language) > -1)){
+    if (req.query.language && (datasetInfo.languages.includes(req.query.language))) {
       var activeLanguage = req.query.language
     } else {
-    var activeLanguage = datasetInfo.defaultLanguage
+      var activeLanguage = datasetInfo.defaultLanguage
     }
     var projection = req.query.projection || datasetInfo.recommendedProjections[0]
-    if (datasetInfo.recommendedProjections.indexOf(projection) === -1){
-      if (req.query.allow_all){
-
-      } else {
+    if (!datasetInfo.recommendedProjections.includes(projection)){
+      if (!req.query.allow_all){
         projection = datasetInfo.recommendedProjections[0]
       }
     }
@@ -78,7 +84,6 @@ app.get('/demo', function(req, res) {
           "height="+(req.query.height || "900")].join("&"),
         t: textFunctions,
       })
-    }
   })
 
 })

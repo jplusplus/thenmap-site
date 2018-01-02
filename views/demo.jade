@@ -1,20 +1,20 @@
 extends ./layout.jade
 
 block title
-  title Demonstrations of thenmap.js
+  title Thenmap: Interactive sandbox
 
 block content
   div.row
     header.col-sm-10.col-sm-offset-1
       h1 Interactive sandbox
-      p.intro Here is a preview of available datasets using <b>thenmap.js</b>, s a simple javascript library for accessing the <a href="//api.thenmap.net">Thenmap API</a>. For the full documentation, please see <a href="https://github.com/rotsee/thenmap-js">github.com/rotsee/thenmap-js</a>.
+      p.intro Here is a preview of available datasets using <b>thenmap.js</b>, a simple javascript library for accessing the <a href="http://api.thenmap.net">Thenmap API</a>. For the full documentation, please see <a href="https://github.com/rotsee/thenmap-js">github.com/rotsee/thenmap-js</a>.
 
   form(method='get',name="form").col-sm-10.col-sm-offset-1
     div.form-group.form-inline
       label(for='dataset') Dataset
       select(name="dataset",id="dataset",onchange="this.form.submit()").form-control
-        each dataset in availableDatasets
-          option(value=dataset, selected=activeDataset == dataset) #{dataset}
+        each dataset, datasetId in availableDatasets
+          option(value=datasetId, selected=activeDataset == datasetId) #{dataset}
       p See <a href="//api.thenmap.net#datasets">api.thenmap.net</a> for a description of available datasets
 
     div.form-group.form-inline
