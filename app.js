@@ -5,7 +5,7 @@ const favicon = require('serve-favicon')
 const textFunctions = require('./lib/text-functions')("en-GB")
 const request = require('request')
 
-var app = express()
+let app = express()
 app.set('view engine', 'jade')
 app.set('views', __dirname + '/views')
 
@@ -23,6 +23,7 @@ const availableDatasets = {
   'ch-8': "Switzerland (municipalities)",
   'dk-7': "Denmark (municipalities)",
 }
+
 app.get('/demo', function(req, res) {
 
   if ((req.query.dataset) && (req.query.dataset in availableDatasets)) {
@@ -43,6 +44,7 @@ app.get('/demo', function(req, res) {
   } else {
     var apiUrl = `http://api.thenmap.net/v2/${dataset}/info/${date}`
   }
+
   request(apiUrl, function (error, response, body) {
     if (error) {
       console.log(error)
@@ -56,34 +58,35 @@ app.get('/demo', function(req, res) {
     } else {
       var activeLanguage = datasetInfo.defaultLanguage
     }
-    var projection = req.query.projection || datasetInfo.recommendedProjections[0]
+
+    let projection = req.query.projection || datasetInfo.recommendedProjections[0]
     if (!datasetInfo.recommendedProjections.includes(projection)){
       if (!req.query.allow_all){
         projection = datasetInfo.recommendedProjections[0]
       }
     }
-      res.render('demo',{
-        availableDatasets: availableDatasets,
-        activeDataset: dataset,
-        datasetInfo: datasetInfo,
-        date: date,
-        width: req.query.width || "900",
-        height: req.query.height || "900",
-        activeDatakey: req.query.dataKey || "",
-        activeLanguage: activeLanguage,
-        requestedProjection: projection,
-        env: app.get('env'),
-        allow_all: req.query.allow_all || "",
-        queryString: [
-          "dataKey="+(req.query.dataKey || ""),
-          "dataset="+dataset,
-          "date="+date,
-          "language="+activeLanguage,
-          "projection="+projection,
-          "width="+(req.query.width || "900"),
-          "height="+(req.query.height || "900")].join("&"),
-        t: textFunctions,
-      })
+    res.render('demo',{
+      availableDatasets: availableDatasets,
+      activeDataset: dataset,
+      datasetInfo: datasetInfo,
+      date: date,
+      width: req.query.width || "900",
+      height: req.query.height || "900",
+      activeDatakey: req.query.dataKey || "",
+      activeLanguage: activeLanguage,
+      requestedProjection: projection,
+      env: app.get('env'),
+      allow_all: req.query.allow_all || "",
+      queryString: [
+        "dataKey="+(req.query.dataKey || ""),
+        "dataset="+dataset,
+        "date="+date,
+        "language="+activeLanguage,
+        "projection="+projection,
+        "width="+(req.query.width || "900"),
+        "height="+(req.query.height || "900")].join("&"),
+      t: textFunctions,
+    })
   })
 
 })
@@ -107,9 +110,9 @@ app.get('/svg', function(req, res) {
     "width="+(req.query.width || "900"),
     "height="+(req.query.height || "900")].join("&")
   if (app.get('env') === 'development') {
-    var apiUrl = "http://localhost:3000/v2/" + req.query.dataset + "/svg/" + req.query.date
+    var apiUrl = `http://localhost:3000/v2/${req.query.dataset}/svg/${req.query.date}`
   } else {
-    var apiUrl = "http://api.thenmap.net/v1/" + req.query.dataset + "/svg/" + req.query.date
+    var apiUrl = `http://api.thenmap.net/v2/${req.query.dataset}/svg/${req.query.date}`
   }
   request(apiUrl, function (error, response, body) {
     if (!error && response.statusCode == 200) {
@@ -130,11 +133,10 @@ app.use(function(req, res, next) {
 })
 
 //Start server
-var server = app.listen(process.env.PORT || 3001, function() {
+let server = app.listen(process.env.PORT || 3001, function() {
 
-  var host = server.address().address
-  var port = server.address().port
-
+  let host = server.address().address
+  let port = server.address().port
   console.log('Thenmap site listening at http://%s:%s', host, port)
 
 })
