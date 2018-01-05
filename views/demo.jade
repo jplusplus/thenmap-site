@@ -83,13 +83,13 @@ block content
     h2 API calls
     p Use one these API endpoints to fetch data to produce the map above. See #[a(href="http://api.thenmap.net/") the API documentation] for details.
     p Geojson:
-      code.selectonclick http://api.thenmap.net/v1/#{activeDataset}/geo/#{date}
+      code.selectonclick http://api.thenmap.net/v2/#{activeDataset}/geo/#{date}
     p Topojson:
-      code.selectonclick http://api.thenmap.net/v1/#{activeDataset}/geo/#{date}?geo_type=topojson
+      code.selectonclick http://api.thenmap.net/v2/#{activeDataset}/geo/#{date}?geo_type=topojson
     p SVG:
-      code.selectonclick http://api.thenmap.net/v1/#{activeDataset}/svg/#{date}?svg_proj=#{requestedProjection}
+      code.selectonclick http://api.thenmap.net/v2/#{activeDataset}/svg/#{date}?svg_proj=#{requestedProjection}
     p Data:
-      code.selectonclick http://api.thenmap.net/v1/#{activeDataset}/data/#{date}?data_lang=#{activeLanguage}&data_props=name|is_in|etc...
+      code.selectonclick http://api.thenmap.net/v2/#{activeDataset}/data/#{date}?language=#{activeLanguage}&data_props=name|is_in|etc...
 
   if env == 'development'
     script(src="/js/thenmap-1.0.6.min.js")
