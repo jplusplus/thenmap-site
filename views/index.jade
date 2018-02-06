@@ -26,20 +26,21 @@ block content
       h2 An example: French colonies in 1949
       figure
         div#worldmap
-      script(src="//drvkoaf101245.cloudfront.net/thenmap-1.0.6.min.js")
-      //-script(src="/js/thenmap-1.0.6.js")
+      //-script(src="//drvkoaf101245.cloudfront.net/thenmap-1.0.6.min.js")
+      script(src="//drvkoaf101245.cloudfront.net/thenmap-2.0.0.min.js")
       script.
           var container = document.getElementById("worldmap");
           var containerWidth = container.offsetWidth;
 
           var settings = {
             dataKey: "1xyNmpKKksy7ZaELB12UY4M2CP0-4EkwO7DWpfu30wsE",
-            dataset: "world",
+            dataset: "world-2",
             date: "1949-05-06",
             language: "en",
             defaultColor: "#333",
             width:containerWidth,
             height:containerWidth * 0.4,
+            debug: true
           }
           Thenmap.init("worldmap", settings);
 
@@ -62,11 +63,11 @@ block content
         pre
           code.prettyprint(style="white-space: pre")
             |&lt;div id="worldmap">&lt;/div>
-            |&lt;script src="https://drvkoaf101245.cloudfront.net/thenmap-1.0.6.min.js">&lt;/script>
+            |&lt;script src="https://drvkoaf101245.cloudfront.net/thenmap-2.0.0.min.js">&lt;/script>
             |&lt;script>
             |var settings = {
             |    dataKey: "1xyNmpKKksy7ZaELB12UY4M2CP0-4EkwO7DWpfu30wsE",
-            |    dataset: "world",
+            |    dataset: "world-2",
             |    date: "1949-05-06"
             |}
             |Thenmap.init("worldmap", settings);
