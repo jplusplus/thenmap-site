@@ -24,7 +24,7 @@ const availableDatasets = {
   'dk-7': "Denmark (municipalities)",
 }
 
-app.get('/demo', function(req, res) {
+app.get('/demo', function(req, res, next) {
 
   if ((req.query.dataset) && (req.query.dataset in availableDatasets)) {
     var dataset = req.query.dataset
