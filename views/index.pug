@@ -1,0 +1,146 @@
+extends ./layout.jade
+
+block content
+  div.jumbotron.col-sm-10.col-sm-offset-1
+
+    h1 Thenmap
+    p.intro Thenmap is a repository for historical, current and future borders.<br/>You can use it to create maps with your favourite mapping tool, or fetch a ready-made SVG map.
+
+  div.row
+    a(href="/demo").unlink
+      div.col-sm-5.col-sm-offset-1
+        h2 Explore the data
+        p.lead Preview available data, and download ready-made SVG files in the sandbox.
+        p Use the sandbox to play around with datasets, projections and languages.
+        p You can also preview your own data on a choropleth map, using Google Sheets.
+        p.linkin
+          object #[a(href="/demo") Sandbox &rarr;]
+
+    div.col-sm-5
+      h2 Use with CartoDB
+      p.lead Use an url to the #[a(href="http://api.thenmap.net") Thenmap API] as the source for a map layer in CartoDB.
+      p To make a map of Finnish municipalities on January 1 2016, use this url: #[code.selectonclick http:/&#47;api.thenmap.net/v2/fi-8/geo/2016-01-01?geo_props=name&amp;language=fi]. This will also include municipality names in your selected language. Replace #[code fi-8] with the id you the dataset you want to use, #[code fi] with the language of your choice, and date as required.
+
+  div.row
+    div.col-sm-10.col-sm-offset-1
+      h2 An example: French colonies in 1949
+      figure
+        div#worldmap
+      //-script(src="//drvkoaf101245.cloudfront.net/thenmap-1.0.6.min.js")
+      script(src="//drvkoaf101245.cloudfront.net/thenmap-2.0.0.min.js")
+      script.
+          var container = document.getElementById("worldmap");
+          var containerWidth = container.offsetWidth;
+
+          var settings = {
+            dataKey: "1xyNmpKKksy7ZaELB12UY4M2CP0-4EkwO7DWpfu30wsE",
+            dataset: "world-2",
+            date: "1949-05-06",
+            language: "en",
+            defaultColor: "#333",
+            width:containerWidth,
+            height:containerWidth * 0.4,
+            debug: true
+          }
+          Thenmap.init("worldmap", settings);
+
+  div.row
+    a(href="http://api.thenmap.net").unlink
+      div.col-sm-5.col-sm-offset-1
+        h2 Thenmap API
+        p.lead Use the Thenmap API to fetch geodata as GeoJSON or TopoJSON, prerendered maps as SVG files, or metadata.
+        p Pass a date and optionally a preferred coordinate system or projection, and the API will give you all borders in return. Like #[object #[a(href="//api.thenmap.net/v1/world/geo/1956") the world in 1956]], or #[object #[a( href="//api.thenmap.net/v1/sweden/geo/1979") Swedish municipalities from 1979]].
+        p The Thenmap API currently holds world borders (1945&ndash;), Swedish municipalities (1974&ndash;) and counties (1968&ndash;), Finnish municipalities (2010&ndash;), US states (1865&ndash;), Norwegian municipalities (2006&ndash;), Municipalities of Greenland (1979&ndash;) and Municipalities of Switzerland (2010&ndash;).
+        p.linkin
+          object #[a(href="http://api.thenmap.net") API documentation &rarr;]
+
+    a(href="https://github.com/rotsee/thenmap-js").unlink
+      div.col-sm-5
+        h2 Thenmap.js
+        p.lead Lightweight JS library for simple maps
+        p You can color the map by defining fill colors in a #[object #[a(href="https://docs.google.com/spreadsheets/d/1xyNmpKKksy7ZaELB12UY4M2CP0-4EkwO7DWpfu30wsE") Google spreadsheet]].
+        p This code draws the map above.
+        pre
+          code.prettyprint(style="white-space: pre")
+            |&lt;div id="worldmap">&lt;/div>
+            |&lt;script src="https://drvkoaf101245.cloudfront.net/thenmap-2.0.0.min.js">&lt;/script>
+            |&lt;script>
+            |var settings = {
+            |    dataKey: "1xyNmpKKksy7ZaELB12UY4M2CP0-4EkwO7DWpfu30wsE",
+            |    dataset: "world-2",
+            |    date: "1949-05-06"
+            |}
+            |Thenmap.init("worldmap", settings);
+            |&lt;/script>
+        p Play around with the settings in the #[object #[a(href="/demo") interactive sandbox]]
+        p.linkin
+          object #[a(href="https://github.com/rotsee/thenmap-js") Thenmap.js documentation &rarr;]
+
+  div.row
+    div.col-sm-5.col-sm-offset-1
+      h2 There is metadata too!
+      p We use #[a(href="https://www.wikidata.org/wiki/Wikidata:Main_Page") WikiData] to populate the database with useful metadata.
+      p This provides you with an easy way to fetch, say, #[object #[a(href="http://api.thenmap.net/v1/world/data/1974?data_props=currency|name") the currencies in use in the world in 1974]].
+      p For a complete usage example, see #[objects #[a(href="http://flags-of-the-world.herokuapp.com/") flags-of-the-world.herokuapp.com]].
+
+    a(href="https://github.com/jplusplus/thenmap-python").unlink
+      div.col-sm-5
+        h2 Python library
+        p We have a simple Python library make access to the most used parts of the API really simple.
+        p Run <code>pip install thenmap</code> to get started.
+          p.linkin
+            object #[a(href="https://github.com/jplusplus/thenmap-python") thenmap-python &rarr;]
+
+  div.row
+    div.col-sm-5.col-sm-offset-1
+      h2 Credits, copyright and licensing
+      p Thenmap is built by <a href="//leowallentin.se">Leo Wallentin</a> from <a href="//jplusplus.se">Journalism++ Stockholm</a>, Danny Mallas Pereira and <a href="//twitter.com/jensfinnas">Jens Finnäs</a>.
+      p And extra applause: <a href="//www.iis.se/">Internetstiftelsen</a> has been kind enough to <a href="https://www.iis.se/blogg/nio-internetframjande-projekt-far-pengar-av-se/">support this project</a>.
+
+    div.col-sm-5
+      h2 Latest changes
+      p Minor border fixes and translations are added continuously. These are the recent major changes:
+      ul
+        li 2018-01-04: Swiss municipality changes in 2018, 2019 (#[code ch-8])
+        li 2017-11-03: Norwegian border changes in 2018 (#[code no-7])
+        li 2017-01-27: Added Danish municipalities (#[code dk-7])
+        li 2016-12-20: Added Norwegian municipalities (#[code no-7])
+        li 2016-12-19: Swiss municipality changes in 2017 (#[code ch-8])
+        li 2016-12-18: Finnish municipality changes in 2017 (#[code fi-8])
+        //- li 2016-07-07: Major cleanup of world borders (#[code world-2])
+        //- li 2016-03-16: Added variants for Moldova: With and without Transnistria (#[code world-2])
+
+  div.row
+    div.col-sm-10.col-sm-offset-1
+      h2 Contribute
+      p Found an error? Report in on <a href="https://trello.com/b/aqFu3s1d/thenmap">our Trello board</a>!
+
+  .row
+    .col-sm-10.col-sm-offset-1
+      small Looking for the old version of this page? Find it at <a class="servicelink" href="//old.thenmap.net">old.thenmap.net</a>.
+
+  script.
+    function selectText(element) {
+      var doc = document;
+
+      if (doc.body.createTextRange) { // ms
+        var range = doc.body.createTextRange();
+        range.moveToElementText(element);
+        range.select();
+      } else if (window.getSelection) { // moz, opera, webkit
+        var selection = window.getSelection();
+        var range = doc.createRange();
+        range.selectNodeContents(element);
+        selection.removeAllRanges();
+        selection.addRange(range);
+      }
+    }
+    var elems = document.getElementsByTagName('*'), i;
+    for (i in elems) {
+        if((' ' + elems[i].className + ' ').indexOf(' ' + 'selectonclick' + ' ')
+                > -1) {
+            elems[i].addEventListener('click', function(){
+              selectText(this);
+            });
+        }
+    }

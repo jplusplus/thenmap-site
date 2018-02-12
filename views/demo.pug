@@ -1,0 +1,134 @@
+extends ./layout.jade
+
+block title
+  title Thenmap: Interactive sandbox
+
+block content
+  div.row
+    header.col-sm-10.col-sm-offset-1
+      h1 Interactive sandbox
+      p.intro Here is a preview of available datasets using <b>thenmap.js</b>, a simple javascript library for accessing the <a href="http://api.thenmap.net">Thenmap API</a>. For the full documentation, please see <a href="https://github.com/rotsee/thenmap-js">github.com/rotsee/thenmap-js</a>.
+
+  form(method='get',name="form").col-sm-10.col-sm-offset-1
+    div.form-group.form-inline
+      label(for='dataset') Dataset
+      select(name="dataset",id="dataset",onchange="this.form.submit()").form-control
+        each dataset, datasetId in availableDatasets
+          option(value=datasetId, selected=activeDataset == datasetId) #{dataset}
+      p See <a href="//api.thenmap.net#datasets">api.thenmap.net</a> for a description of available datasets
+
+    div.form-group.form-inline
+      label(for="date") Date
+      input(type="date", name="date", id="date" value=date).form-control
+
+    div.form-group.form-inline
+      label(for="language") Language
+      select(name="language", id="language").form-control
+        each language in datasetInfo.languages
+          option(value=language, selected=language == activeLanguage) #{language}
+
+    div.form-group.form-inline
+      label(for="projection") Projection
+      input(name="projection", id="projection", value=requestedProjection, list="projections").form-control
+      datalist#projections
+        each projection in datasetInfo.recommendedProjections
+          option(value=projection)
+      p Recommended projections for this dataset: !{t.arrayText(datasetInfo.recommendedProjections, null, ["code", {class: "selectonclick"}])}
+        small
+          label(for="allow_all") Allow non recommended projections?
+            input(type="checkbox", name="allow_all", id="allow_all", checked=(allow_all === "on"), style="margin-left:.8em").checkbox.form-control.input-small
+
+    div.form-group.form-group.form-inline
+        label(for="width") Width
+        input(name="width", id="width", value=width).form-control
+        label(for="height") Height
+        input(name="height", id="height", value=height).form-control
+        p Size in pixels
+
+    div.form-group.form-inline
+        label(for="dataKey") Datakey (Google sheets ID)
+        input(name="dataKey", id="dataKey", value=activeDatakey).form-control
+        p See the #[a(href="https://docs.google.com/spreadsheets/d/1dj8qw3I75qudflfkr4wBDipeehnecsSslemkn2j5qRE/edit?usp=sharing") sample document].
+
+    div.form-group.form-inline
+      input(type='submit', value='Show map').form-control
+
+  section.col-sm-10.col-sm-offset-1
+    h2 Result
+    div#demoMap
+    p
+      a(href="/clean?"+queryString) Open map in new window
+    p
+      a(href="/svg?"+queryString, download="thenmap.svg") Download as SVG
+
+  section.col-sm-10.col-sm-offset-1
+    h2 thenmap.js settings
+    p Use the below code to put this map on a web page.
+    pre
+      code.prettyprint.lang-html
+        |&lt;div id="map"&gt;&lt;/div&gt;
+        |&lt;script src="//drvkoaf101245.cloudfront.net/thenmap-1.0.6.min.js"&gt;&lt;/script&gt;
+        |var settings = {
+        |  dataKey: "!{activeDatakey}",
+        |  dataset: "!{activeDataset}",
+        |  date: "!{date}"
+        |  language: "#{activeLanguage}",
+        |  projection: "#{requestedProjection}",
+        |  width:!{width},
+        |  height:!{height}
+        |};
+        |Thenmap.init("map", settings);
+
+  section.col-sm-10.col-sm-offset-1
+    h2 API calls
+    p Use one these API endpoints to fetch data to produce the map above. See #[a(href="http://api.thenmap.net/") the API documentation] for details.
+    p Geojson:
+      code.selectonclick http://api.thenmap.net/v2/#{activeDataset}/geo/#{date}
+    p Topojson:
+      code.selectonclick http://api.thenmap.net/v2/#{activeDataset}/geo/#{date}?geo_type=topojson
+    p SVG:
+      code.selectonclick http://api.thenmap.net/v2/#{activeDataset}/svg/#{date}?svg_proj=#{requestedProjection}
+    p Data:
+      code.selectonclick http://api.thenmap.net/v2/#{activeDataset}/data/#{date}?language=#{activeLanguage}&data_props=name|capital|is_in|etc...
+
+  if env == 'development'
+    script(src="/js/thenmap-1.0.6.min.js")
+    script.
+      Thenmap.debug=true;
+  else
+    script(src="//drvkoaf101245.cloudfront.net/thenmap-1.0.6.min.js")
+  script var dataset = ""
+  script.
+    var settings = {
+          dataKey: "!{activeDatakey}",
+          dataset: "!{activeDataset}",
+          date: "!{date}",
+          language: "#{activeLanguage}",
+          projection: "#{requestedProjection}",
+          width:!{width},
+          height:!{height},
+        }
+    Thenmap.init("demoMap", settings);
+  script.
+    function selectText(element) {
+      var doc = document;
+
+      if (doc.body.createTextRange) { // ms
+        var range = doc.body.createTextRange();
+        range.moveToElementText(element);
+        range.select();
+      } else if (window.getSelection) { // moz, opera, webkit
+        var selection = window.getSelection();
+        var range = doc.createRange();
+        range.selectNodeContents(element);
+        selection.removeAllRanges();
+        selection.addRange(range);
+      }
+    }
+    var elements = document.getElementsByClassName('selectonclick');
+    /* IE8 not supported, because we use SVG anyway */
+    for (var i=0;i<elements.length;i++){
+      elements[i].addEventListener("click", function(){
+        selectText(this);
+      }, false);
+    }
