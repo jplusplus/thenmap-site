@@ -82,9 +82,9 @@ app.get('/demo', function(req, res, next) {
         "dataset="+dataset,
         "date="+date,
         "language="+activeLanguage,
-        "projection="+projection,
-        "width="+(req.query.width || "900"),
-        "height="+(req.query.height || "900")].join("&"),
+        "svg_proj="+projection,
+        "svg_width="+(req.query.width || "900"),
+        "svg_height="+(req.query.height || "900")].join("&"),
       t: textFunctions,
     })
   })
@@ -95,29 +95,29 @@ app.get('/clean', function(req, res) {
     res.render('clean',{
     activeDataset: req.query.dataset,
     date: req.query.date,
-    width: req.query.width || "900",
-    height: req.query.height || "900",
+    width: req.query.svg_width || "900",
+    height: req.query.svg_height || "900",
     activeDatakey: req.query.dataKey || "",
     activeLanguage: req.query.language,
-    requestedProjection: req.query.projection,
+    requestedProjection: req.query.svg_proj,
   })
 })
 
 app.get('/svg', function(req, res) {
-  var queryString = [
+  let queryString = [
     "language="+req.query.language,
-    "projection="+req.query.projection,
-    "width="+(req.query.width || "900"),
-    "height="+(req.query.height || "900")].join("&")
+    "svg_proj="+req.query.svg_proj,
+    "svg_width="+(req.query.width || "900"),
+    "svg_height="+(req.query.height || "900")].join("&")
   if (app.get('env') === 'development') {
-    var apiUrl = `http://localhost:3000/v2/${req.query.dataset}/svg/${req.query.date}`
+    var apiUrl = `http://localhost:3000/v2/${req.query.dataset}/svg/${req.query.date}?${queryString}`
   } else {
-    var apiUrl = `http://api.thenmap.net/v2/${req.query.dataset}/svg/${req.query.date}`
+    var apiUrl = `http://api.thenmap.net/v2/${req.query.dataset}/svg/${req.query.date}?${queryString}`
   }
   request(apiUrl, function (error, response, body) {
     if (!error && response.statusCode == 200) {
       res.setHeader('Content-Type', 'image/svg+xml')
-      res.end(body["svg"])
+      res.end(body)
     }
   })
 
