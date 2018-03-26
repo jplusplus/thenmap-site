@@ -104,6 +104,7 @@ app.get('/clean', function(req, res) {
 })
 
 app.get('/svg', function(req, res) {
+  // DEPRACATED: The API now delivers SVG directly, so this can be removed
   let queryString = [
     "language="+req.query.language,
     "svg_proj="+req.query.svg_proj,
