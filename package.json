@@ -9,7 +9,7 @@
     "intl": "^1.2.5",
     "pug": "^2.0.3",
     "request": "^2.85.0",
-    "serve-favicon": "^2.4.5"
+    "serve-favicon": "^2.5.0"
   },
   "devDependencies": {},
   "scripts": {
