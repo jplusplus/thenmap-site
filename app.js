@@ -16,6 +16,7 @@ const availableDatasets = {
   'world-2' : "World (nations)",
   'se-4': "Sweden (counties)",
   'se-7': "Sweden (municipalities)",
+  'no-4': "Norway (counties)",
   'no-7': "Norway (municipalities)",
   'fi-8': "Finland (municipalities)",
   'us-4': "United States (states)",
