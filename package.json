@@ -4,9 +4,7 @@
   "description": "Landing page for the Thenmap project",
   "main": "app.js",
   "dependencies": {
-    "cldr": "^5.4.1",
     "express": "^4.17.1",
-    "intl": "^1.2.5",
     "pug": "^2.0.4",
     "request": "^2.88.0",
     "serve-favicon": "^2.5.0"
