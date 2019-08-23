@@ -33,7 +33,7 @@ block content
       datalist#projections
         each projection in datasetInfo.recommendedProjections
           option(value=projection)
-      p Recommended projections for this dataset: !{t.arrayText(datasetInfo.recommendedProjections, null, ["code", {class: "selectonclick"}])}
+      p Recommended projections for this dataset: !{datasetInfo.recommendedProjections.map(x => `<code class="selectonclick">${x}</code>`).join("&middot;")}
         small
           label(for="allow_all") Allow non recommended projections?
             input(type="checkbox", name="allow_all", id="allow_all", checked=(allow_all === "on"), style="margin-left:.8em").checkbox.form-control.input-small
