@@ -15,7 +15,7 @@ block content
       select(name="dataset",id="dataset",onchange="this.form.submit()").form-control
         each dataset, datasetId in availableDatasets
           option(value=datasetId, selected=activeDataset == datasetId) #{dataset}
-      p See <a href="//api.thenmap.net#datasets">api.thenmap.net</a> for a description of available datasets
+      p See <a href="http://api.thenmap.net#datasets">api.thenmap.net</a> for a description of available datasets
 
     div.form-group.form-inline
       label(for="date") Date
@@ -95,7 +95,7 @@ block content
     script.
       Thenmap.debug=true;
   else
-    script(src="//drvkoaf101245.cloudfront.net/thenmap-2.0.0.min.js")
+    script(src="https://drvkoaf101245.cloudfront.net/thenmap-2.0.0.min.js")
   script var dataset = ""
   script.
     var settings = {
