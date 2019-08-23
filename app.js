@@ -3,8 +3,19 @@ const favicon = require('serve-favicon')
 const request = require('request')
 
 let app = express()
+
 app.set('view engine', 'pug')
 app.set('views', __dirname + '/views')
+
+app.use ((req, res, next) => {
+  // redirect http->https
+  if (req.secure || (app.get('env') === 'development')) {
+    next()
+  } else {
+    console.log("REDIR")
+    res.redirect('https://' + req.headers.host + req.url)
+  }
+})
 
 app.use(express.static('static'))
 app.use(favicon(__dirname + '/static/favicons/favicon.ico'))
@@ -135,6 +146,6 @@ let server = app.listen(process.env.PORT || 3001, function() {
 
   let host = server.address().address
   let port = server.address().port
-  console.log('Thenmap site listening at http://%s:%s', host, port)
+  console.log('Thenmap site listening at http://%s:%s in %s mode', host, port, app.get('env'))
 
 })
