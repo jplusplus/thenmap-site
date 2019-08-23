@@ -10,10 +10,10 @@ app.set('views', __dirname + '/views')
 app.use ((req, res, next) => {
   // redirect http->https
   if (req.secure || (app.get('env') === 'development')) {
-    next()
+    return next()
   } else {
-    console.log("REDIR")
     res.redirect('https://' + req.headers.host + req.url)
+    return
   }
 })
 
