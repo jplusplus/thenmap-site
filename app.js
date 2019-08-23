@@ -7,13 +7,13 @@ let app = express()
 app.set('view engine', 'pug')
 app.set('views', __dirname + '/views')
 
+// redirect http->https
+app.enable('trust proxy')
 app.use ((req, res, next) => {
-  // redirect http->https
   if (req.secure || (app.get('env') === 'development')) {
     return next()
   } else {
     res.redirect('https://' + req.headers.host + req.url)
-    return
   }
 })
 
