@@ -2,7 +2,6 @@
 
 const express = require('express')
 const favicon = require('serve-favicon')
-const textFunctions = require('./lib/text-functions')("en-GB")
 const request = require('request')
 
 let app = express()
@@ -86,7 +85,6 @@ app.get('/demo', function(req, res, next) {
         "svg_proj="+projection,
         "svg_width="+(req.query.width || "900"),
         "svg_height="+(req.query.height || "900")].join("&"),
-      t: textFunctions,
     })
   })
 
