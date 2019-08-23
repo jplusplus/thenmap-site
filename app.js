@@ -1,5 +1,3 @@
-'use strict'
-
 const express = require('express')
 const favicon = require('serve-favicon')
 const request = require('request')
