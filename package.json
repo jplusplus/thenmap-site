@@ -5,11 +5,10 @@
   "main": "app.js",
   "dependencies": {
     "express": "^4.17.1",
-    "pug": "^2.0.4",
-    "request": "^2.88.0",
+    "pug": "^3.0.2",
+    "request": "^2.88.2",
     "serve-favicon": "^2.5.0"
   },
-  "devDependencies": {},
   "scripts": {
     "start": "node app.js"
   },
